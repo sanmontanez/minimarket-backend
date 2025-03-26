@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Req, UseGuards, Get } from '@nestjs/common';
+import { Controller, Post, Body, Req, UseGuards, Get, Query } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { SalesService } from './sales.service';
 
@@ -16,8 +16,13 @@ export class SalesController {
     return this.salesService.createSale(productId, quantity, req.user);
   }
 
-  @Get()
-  async getMySales(@Req() req) {
-    return this.salesService.getSalesByUser(req.user);
+  @Get('summary')
+  async getResumenPorProducto(
+    @Req() req,
+    @Query('from') from?: string,
+    @Query('to') to?: string
+  ) {
+    return this.salesService.getResumenPorProducto(req.user, from, to);
   }
+  
 }
