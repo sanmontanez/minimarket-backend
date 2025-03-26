@@ -5,6 +5,8 @@ import { User } from './users/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { ProductsModule } from './products/products.module';
 import { Product } from './products/product.entity';
+import { SalesModule } from './sales/sales.module';
+import { Sale } from './sales/sale.entity';
 
 @Module({
   imports: [
@@ -15,12 +17,13 @@ import { Product } from './products/product.entity';
       username: 'postgres',
       password: 'root',
       database: 'minimarket',
-      entities: [User, Product],
+      entities: [User, Product, Sale],
       synchronize: true, // solo para desarrollo
     }),
     UsersModule,
     AuthModule,
     ProductsModule,
+    SalesModule,
   ],
 })
 export class AppModule {}
