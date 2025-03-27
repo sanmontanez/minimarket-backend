@@ -17,6 +17,7 @@ export class SalesController {
   }
 
   @Get('summary')
+  @UseGuards(AuthGuard('jwt'))
   async getResumenPorProducto(
     @Req() req,
     @Query('from') from?: string,
@@ -24,5 +25,6 @@ export class SalesController {
   ) {
     return this.salesService.getResumenPorProducto(req.user, from, to);
   }
+  
   
 }
